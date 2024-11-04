@@ -17,11 +17,11 @@ Closet Caption is a mobile app designed to simplify the process of listing and s
 
 ## Clone the repository:
 
-    git clone https://github.com/your-username/ClosetCaption.git
+    git clone https://github.com/Spencer-Holman/ClosetCaption.git
 
 ## Navigate to the project directory:
 
-    cd ClosetCaption
+    cd app
 
 ## Install dependencies:
 
