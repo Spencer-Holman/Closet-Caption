@@ -10,7 +10,7 @@ export default function ImageUpload() {
   const [image, setImage] = useState<string | null>(null);
   const [caption, setCaption] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const API_KEY = 'YOUR_HUGGING_FACE_API_KEY'; // Replace with your actual Hugging Face API key
+  const API_KEY = ''
 
   const pickImage = async () => {
     console.log("Button pressed - pickImage started");
