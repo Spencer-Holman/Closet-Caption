@@ -6,7 +6,7 @@ export default function ImageUpload() {
   const [image, setImage] = useState<string | null>(null);
 
   const pickImage = async () => {
-    console.log("Button pressed - pickImage started"); // Log when button is pressed
+    console.log("Button pressed - pickImage started");
 
     // Request permission to access the media library
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -15,20 +15,29 @@ export default function ImageUpload() {
       return;
     }
 
+    // Launch image picker without allowing editing
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
+      allowsEditing: false,
       quality: 1,
     });
 
-    console.log("Result is:", result); // Log result to see structure
+    console.log("Result is:", result);
 
     if (!result.canceled && result.assets && result.assets[0].uri) {
       setImage(result.assets[0].uri);
-      console.log("Image URI is:", result.assets[0].uri); // Log URI if available
+      console.log("Image URI is:", result.assets[0].uri);
     } else {
       console.log("No image selected");
+    }
+  };
+
+  const generateCaptions = () => {
+    if (image) {
+      console.log("Generating captions for image:", image);
+      alert("Captions generated!"); // Placeholder for caption generation logic
+    } else {
+      alert("Please select an image first.");
     }
   };
 
@@ -36,7 +45,16 @@ export default function ImageUpload() {
     <View style={styles.container}>
       <Text style={styles.title}>Image Upload Page</Text>
       <Button title="Select Image" onPress={pickImage} />
-      {image != null ? <Image source={{ uri: image }} style={styles.image} /> : null}
+      {image ? (
+        <>
+          <Image source={{ uri: image }} style={styles.image} />
+          <View style={styles.buttonContainer}>
+            <Button title="Generate Captions" onPress={generateCaptions} />
+          </View>
+        </>
+      ) : (
+        <Text>No image selected</Text>
+      )}
     </View>
   );
 }
@@ -58,5 +76,8 @@ const styles = StyleSheet.create({
     height: 200,
     marginTop: 20,
     borderRadius: 10,
+  },
+  buttonContainer: {
+    marginTop: 20, 
   },
 });
